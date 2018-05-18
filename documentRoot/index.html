@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Northernlight | Demo</title>
+		<meta charset="utf-8" />
+		<style type="text/css">
+			body{
+				background: #212121;
+				color: #fff;
+			}
+			.container{
+				text-align: center;
+			}
+			.error{
+				color: red;
+			}
+			.ok{
+				color: limegreen;
+			}
+			#currentSensorValue{
+				font-size: 20vh;
+				font-weight: bold;
+			}
+		</style>
+    </head>
+    <body>
+		<div class="container">
+			<span id="connState">?</span>
+			<h1>Current Value: </h1>
+			<span id="currentSensorValue">?</span>
+		</div>
+
+		<script src="northernlight.js"></script>
+        <script type="text/javascript">
+            window.addEventListener('sensorRead', function(e){
+				document.getElementById("currentSensorValue").innerHTML = e.value;
+				var tag = document.getElementById("connState");
+				if (e.isConnected == true){
+					tag.innerHTML = "Active";
+					tag.className = "ok";
+				}
+				else{
+					tag.innerHTML = "Device Not found.";
+					tag.className = "error";
+				}
+
+            },false);
+		</script>
+    </body>
+</html>
